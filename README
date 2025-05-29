@@ -11,7 +11,7 @@ Prosta aplikacja REST API do zarządzania listą filmów w pamięci operacyjnej,
 
 1. Sklonuj repozytorium lub skopiuj pliki:
     ```bash
-    git clone https://github.com/twoja-nazwa/movies-api.git
+    git clone https://github.com/popotu447/movies-api.git
     cd movies-api
     ```
 
@@ -36,26 +36,107 @@ Domyślnie API będzie dostępne pod:
 
 Zwraca listę dostępnych metod API oraz przykładowy format danych do dodawania filmu.
 
+#### Przykładowa odpowiedź:
+```json
+{
+  "available_endpoints": {
+    "GET /movies": "List all movies",
+    "GET /movies/<id>": "Get a movie by ID",
+    "POST /movies": "Add a new movie",
+    "PUT /movies/<id>": "Update a movie by ID",
+    "DELETE /movies/<id>": "Delete a movie by ID"
+  },
+  "post_movie_format": {
+    "title": "string",
+    "year": "integer",
+    "genre": "string"
+  },
+  "example": {
+    "POST /movies": {
+      "title": "Inception",
+      "year": 2010,
+      "genre": "Sci-Fi"
+    }
+  }
+}
+```
+
 ---
 
 ### 🔹 `GET /movies`
 
-Zwraca wszystkie filmy.
+Zwraca wszystkie filmy w pamięci.
+
+---
 
 ### 🔹 `GET /movies/<id>`
 
 Zwraca film o podanym `id`.
 
+**Przykład:**  
+`GET /movies/1`
+
 ---
 
 ### 🔹 `POST /movies`
 
-Dodaje nowy film.
+Dodaje nowy film do listy.
 
-**Format JSON:**
+**Nagłówek:**  
+`Content-Type: application/json`
+
+**Przykładowe dane wejściowe:**
 ```json
 {
   "title": "Inception",
   "year": 2010,
   "genre": "Sci-Fi"
 }
+```
+
+---
+
+### 🔹 `PUT /movies/<id>`
+
+Aktualizuje istniejący film.
+
+**Można przesłać tylko te pola, które mają zostać zaktualizowane.**
+
+**Przykład:**
+```json
+{
+  "title": "Inception 2",
+  "year": 2025
+}
+```
+
+---
+
+### 🔹 `DELETE /movies/<id>`
+
+Usuwa film o wskazanym ID z listy.
+
+---
+
+## 💾 Przechowywanie danych
+
+Wszystkie dane są trzymane w pamięci RAM w czasie działania aplikacji (lista Python `movies[]`). Po restarcie serwera dane zostaną utracone.
+
+---
+
+## 🛠 Rozszerzenia możliwe w przyszłości
+
+- Połączenie z bazą danych (SQLite, PostgreSQL)
+- Walidacja danych (np. `marshmallow`, `pydantic`)
+- Autoryzacja JWT
+- Dokumentacja Swagger/OpenAPI
+- Testy jednostkowe (`pytest`)
+- Docker
+
+---
+
+## 👨‍💻 Autor
+
+Projekt demonstracyjny stworzony z użyciem [Flask](https://flask.palletsprojects.com/).  
+Autor: **Twoje Imię**  
+Licencja: MIT
