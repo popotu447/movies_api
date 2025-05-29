@@ -1,0 +1,61 @@
+# 🎬 Movies API – Flask
+
+Prosta aplikacja REST API do zarządzania listą filmów w pamięci operacyjnej, napisana w Pythonie z użyciem Flask.
+
+## 📦 Wymagania
+
+- Python 3.8+
+- pip (Python package manager)
+
+## 🚀 Instalacja
+
+1. Sklonuj repozytorium lub skopiuj pliki:
+    ```bash
+    git clone https://github.com/twoja-nazwa/movies-api.git
+    cd movies-api
+    ```
+
+2. Zainstaluj zależności:
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+3. Uruchom serwer:
+    ```bash
+    python app.py
+    ```
+
+Domyślnie API będzie dostępne pod:  
+`http://localhost:5000/`
+
+---
+
+## 📚 Dokumentacja endpointów
+
+### 🔹 `GET /`
+
+Zwraca listę dostępnych metod API oraz przykładowy format danych do dodawania filmu.
+
+---
+
+### 🔹 `GET /movies`
+
+Zwraca wszystkie filmy.
+
+### 🔹 `GET /movies/<id>`
+
+Zwraca film o podanym `id`.
+
+---
+
+### 🔹 `POST /movies`
+
+Dodaje nowy film.
+
+**Format JSON:**
+```json
+{
+  "title": "Inception",
+  "year": 2010,
+  "genre": "Sci-Fi"
+}
