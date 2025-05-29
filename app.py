@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template_string
 
 app = Flask(__name__)
 
@@ -7,27 +7,30 @@ next_id = 1
 
 @app.route('/', methods=['GET'])
 def api_overview():
-    return jsonify({
-        "available_endpoints": {
-            "GET /movies": "List all movies",
-            "GET /movies/<id>": "Get a movie by ID",
-            "POST /movies": "Add a new movie",
-            "PUT /movies/<id>": "Update a movie by ID",
-            "DELETE /movies/<id>": "Delete a movie by ID"
-        },
-        "post_movie_format": {
-            "title": "string",
-            "year": "integer",
-            "genre": "string"
-        },
-        "example": {
-            "POST /movies": {
-                "title": "Inception",
-                "year": 2010,
-                "genre": "Sci-Fi"
-            }
-        }
-    })
+    html = """
+    <h1>🎬 Movies API – Flask</h1>
+    <h2>📚 Dostępne endpointy</h2>
+    <ul>
+        <li><strong>GET /movies</strong> – List all movies</li>
+        <li><strong>GET /movies/&lt;id&gt;</strong> – Get a movie by ID</li>
+        <li><strong>POST /movies</strong> – Add a new movie</li>
+        <li><strong>PUT /movies/&lt;id&gt;</strong> – Update a movie by ID</li>
+        <li><strong>DELETE /movies/&lt;id&gt;</strong> – Delete a movie by ID</li>
+    </ul>
+    <h2>📝 Format danych (POST /movies)</h2>
+    <pre>{
+    "title": "string",
+    "year": 2024,
+    "genre": "string"
+}</pre>
+    <h2>📦 Przykład</h2>
+    <pre>{
+    "title": "Inception",
+    "year": 2010,
+    "genre": "Sci-Fi"
+}</pre>
+    """
+    return render_template_string(html)
 
 
 @app.route('/movies', methods=['GET'])
